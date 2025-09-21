@@ -1,4 +1,39 @@
-img {
-    width: 100vw;
-    height: 100vh;
+.background {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  overflow: hidden; /* hide the cut bottom */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* align container to top */
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* ensure cropped bottom is hidden */
+}
+
+.image-container img {
+  width: 100%;     /* always span full width */
+  height: auto;    /* keep proportions */
+  display: block;
+  position: absolute;
+  top: 0;          /* stick to top, so only bottom cuts */
+  left: 0;
+}
+
+/* Overlay matches the image area */
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.5) 30%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }

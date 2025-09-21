@@ -1,25 +1,36 @@
-nav {
+.content {
     position: fixed;
+    display: flex;
+    justify-content: space-between;
     /* Fix the navbar at the top */
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
     /* High z-index to stay above content */
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.05);
     /* Transparent background */
     box-sizing: border-box;
-    padding: 32px 20%;
+    padding: 32px 10%;
+
+    img {
+      width: 300px;
+    }
+}
+
+nav {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
+    gap: 64px;
+    align-items: flex-start;
 }
 
 nav a {
   position: relative;
   color: #fff;
   text-decoration: none;
-  font-size: 18px;
+  font-family: 'Akronim', sans-serif;
+  font-size: 20px;
   transition: transform 0.2s ease;
 
   &::after {
