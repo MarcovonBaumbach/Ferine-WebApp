@@ -1,0 +1,76 @@
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  font-family: Raleway, sans-serif;
+}
+
+.wave-background {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(180deg, #fdfbf6 0%, #f7f3e9 100%);
+  overflow: hidden;
+}
+
+/* Subtle moving texture overlay */
+.texture-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: repeating-radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 2px);
+  background-size: 150px 150px;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  z-index: 0;
+  pointer-events: none;
+  animation: textureShift 200s linear infinite;
+  transform: translate(var(--texture-offsetX, 0px), var(--texture-offsetY, 0px));
+}
+
+/* Shared wave style */
+.wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+  animation: waveMove 80s ease-in-out infinite;
+  transform: translate(var(--wave1-offsetX, 0px), var(--wave1-offsetY, 0px));
+  z-index: 0;
+}
+
+/* Layer variations */
+.wave1 { background: #efe9dd; animation-duration: 90s; transform: translate(var(--wave1-offsetX,0px), var(--wave1-offsetY,0px)); }
+.wave2 { background: #f5efe3; animation-duration: 110s; transform: translate(var(--wave2-offsetX,0px), var(--wave2-offsetY,0px)); }
+.wave3 { background: #ede6d9; animation-duration: 130s; transform: translate(var(--wave3-offsetX,0px), var(--wave3-offsetY,0px)); }
+
+/* Morphing + drifting animation */
+@keyframes waveMove {
+  0%   { border-radius: 45% 55% 55% 45%; }
+  25%  { border-radius: 50% 50% 45% 55%; }
+  50%  { border-radius: 55% 45% 50% 50%; }
+  75%  { border-radius: 50% 55% 45% 50%; }
+  100% { border-radius: 45% 55% 55% 45%; }
+}
+
+/* Slow drifting texture */
+@keyframes textureShift {
+  0%   { transform: translate(0,0); }
+  50%  { transform: translate(-5%,-5%); }
+  100% { transform: translate(0,0); }
+}
+
+/* Content styling */
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #4b3d2a;
+  padding-top: 20vh;
+}
