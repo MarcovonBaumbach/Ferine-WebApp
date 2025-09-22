@@ -37,44 +37,29 @@ nav a {
   position: fixed;
   display: flex;
   justify-content: space-between;
-  /* Fix the navbar at the top */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
-  /* High z-index to stay above content */
+  z-index: 2;
   background: rgba(0, 0, 0, 0.05);
-  /* Transparent background */
   box-sizing: border-box;
   padding: 32px 10%;
-}
-
-.logo-container {
-  position: relative;
-  display: inline-block;
 }
 
 .logo {
   width: 300px;
   height: auto;
-  position: relative;
   z-index: 1;
-  animation: shake 1.2s ease-in-out;
-  animation-fill-mode: forwards;
 
-  &:hover {
-    animation: rotat 1.2s ease-in-out;
+  // Shake on page load
+  &.shake {
+    animation: shake 1.2s ease-in-out forwards;
   }
-}
 
-.fire-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  width: 100%;   /* match logo width */
-  height: 100%;  /* match logo height */
-  z-index: 2;
+  // Rotation animation class, triggered via JS
+  &.rotate {
+    animation: rotat 1.2s ease-in-out forwards;
+  }
 }
 
 /* Shake animation on page load */
