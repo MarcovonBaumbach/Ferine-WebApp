@@ -1,28 +1,8 @@
-.content {
-    position: fixed;
-    display: flex;
-    justify-content: space-between;
-    /* Fix the navbar at the top */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    /* High z-index to stay above content */
-    background: rgba(0, 0, 0, 0.05);
-    /* Transparent background */
-    box-sizing: border-box;
-    padding: 32px 10%;
-
-    img {
-      width: 300px;
-    }
-}
-
 nav {
-    display: flex;
-    justify-content: flex-end;
-    gap: 64px;
-    align-items: flex-start;
+  display: flex;
+  justify-content: flex-end;
+  gap: 64px;
+  align-items: flex-start;
 }
 
 nav a {
@@ -49,6 +29,121 @@ nav a {
   }
 
   &:hover::after {
-    width: 100%;           // underline slides from left to right
+    width: 100%; // underline slides from left to right
+  }
+}
+
+.content {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  /* Fix the navbar at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  /* High z-index to stay above content */
+  background: rgba(0, 0, 0, 0.05);
+  /* Transparent background */
+  box-sizing: border-box;
+  padding: 32px 10%;
+}
+
+.logo-container {
+  position: relative;
+  display: inline-block;
+}
+
+.logo {
+  width: 300px;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  animation: shake 1.2s ease-in-out;
+  animation-fill-mode: forwards;
+
+  &:hover {
+    animation: rotat 1.2s ease-in-out;
+  }
+}
+
+.fire-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;   /* match logo width */
+  height: 100%;  /* match logo height */
+  z-index: 2;
+}
+
+/* Shake animation on page load */
+@keyframes shake {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-15px);
+  }
+
+  60% {
+    transform: translateY(-8px);
+  }
+
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  75% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes rotat {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  75% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0deg);
   }
 }
