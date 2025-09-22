@@ -22,6 +22,10 @@ export class NavbarComponent {
       logo.classList.remove('shake');
     });
 
+    setInterval(() => {
+        logo.classList.add('rotate');
+      }, 3600);
+
     // Rotate on hover, but last full 1.2s
     logo.addEventListener('mouseenter', () => {
       logo.classList.add('rotate');
