@@ -45,13 +45,14 @@
     gap: 96px; // increased spacing between icons
     justify-content: center;
 
-    .social-icon {
-      color: #fff;
-      font-size: 32px; // slightly bigger icons
-      transition: color 0.2s ease, transform 0.2s ease;
+    .social-icon fa-icon {
+      font-size: 32px;
+      color: var(--icon-color, black); // fallback if variable not set
+      transition: transform 0.2s ease, color 0.2s ease;
+      cursor: pointer;
 
       &:hover {
-        color: red; // red on hover
+        color: red; // overrides variable on hover
         transform: scale(1.1);
       }
     }
