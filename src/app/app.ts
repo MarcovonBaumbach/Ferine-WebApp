@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, Inject, PLATFORM_ID, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, RouterOutlet, Router } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar';
 import { isPlatformBrowser } from '@angular/common';
 import { FooterComponent } from './footer/footer';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,20 @@ import { FooterComponent } from './footer/footer';
 })
 export class App implements AfterViewInit{
   protected readonly title = signal('band-website');
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  isDarkPage = true; // true = white (default), false = black
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        // White for home, music, about; black for news
+        if (event.url === '/news') {
+          this.isDarkPage = false; // black links/logo
+        } else {
+          this.isDarkPage = true; // white links/logo
+        }
+      });
+  }
 
   ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;

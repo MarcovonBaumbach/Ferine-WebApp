@@ -33,7 +33,7 @@ export class FooterComponent {
       case '/music':
         return 'black';
       case '/about':
-        return 'black';
+        return 'white';
       default:
         return 'white';
     }

@@ -1,9 +1,15 @@
 <div class="content">
-    <img #logo src="assets/img/ferine-logo.png" alt="Band Logo" class="logo" />
-    <nav>
-        <a href="">HOME</a>
-        <a href="news">NEWS</a>
-        <a href="music">MUSIC</a>
-        <a href="about">ABOUT</a>
-    </nav>
+  <img
+    #logo
+    [src]="isDark ? 'assets/img/ferine-logo.png' : 'assets/img/ferine-logo-black.png'"
+    alt="Band Logo"
+    class="logo"
+    [ngClass]="{'shake': true}"
+  />
+  <nav>
+    <a href="" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">HOME</a>
+    <a href="news" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">NEWS</a>
+    <a href="music" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">MUSIC</a>
+    <a href="about" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">ABOUT</a>
+  </nav>
 </div>

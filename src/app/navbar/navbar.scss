@@ -20,7 +20,8 @@ nav a {
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: #fff;
+    background-color: currentColor;
+    /* use current text color */
     transition: width 0.3s ease;
   }
 
@@ -31,6 +32,20 @@ nav a {
   &:hover::after {
     width: 100%; // underline slides from left to right
   }
+}
+
+/* Dynamic text colors */
+.dark-link {
+  color: #fff !important;
+}
+
+.light-link {
+  color: #000 !important;
+}
+
+/* Shake animation already exists */
+.logo.shake {
+  animation: shake 1.2s ease-in-out forwards;
 }
 
 .content {

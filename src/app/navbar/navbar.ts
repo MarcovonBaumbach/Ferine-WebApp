@@ -1,14 +1,18 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
+   imports: [
+    CommonModule
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'
 })
 
 export class NavbarComponent {
+  @Input() isDark = true;
   @ViewChild('logo', { static: false }) logoRef!: ElementRef<HTMLImageElement>;
 
   ngAfterViewInit() {
@@ -21,11 +25,7 @@ export class NavbarComponent {
     logo.addEventListener('animationend', () => {
       logo.classList.remove('shake');
     });
-
-    setInterval(() => {
-        logo.classList.add('rotate');
-      }, 3600);
-
+    
     // Rotate on hover, but last full 1.2s
     logo.addEventListener('mouseenter', () => {
       logo.classList.add('rotate');

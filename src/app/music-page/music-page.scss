@@ -1,16 +1,45 @@
-.punk-background {
+.content iframe {
+  border: none; /* remove default border */
+  border-radius: 20px 50px 20px 50px; /* organic, irregular shape */
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 
+              0 0 60px rgba(170, 0, 255, 0.3); /* neon glow effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 90%;
+  width: 420px;
+  height: 315px;
+  display: block;
+  margin: 2rem auto; /* centered */
+}
+
+.content iframe:hover {
+  transform: scale(1.05) rotate(-1deg); /* subtle shake & grow */
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 
+              0 0 70px rgba(170, 0, 255, 0.5); /* stronger glow on hover */
+}
+
+/* Optional: organic wave border effect */
+.content iframe {
+  clip-path: polygon(
+    5% 0%, 95% 0%, 
+    100% 10%, 100% 90%, 
+    95% 100%, 5% 100%, 
+    0% 90%, 0% 10%
+  );
+}
+
+.punk-background-light {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: #111;
+  background: #0a0a0a;
 }
 
 .texture-overlay {
   position: absolute; top: 0; left: 0;
-  width: 200%; height: 200%;
-  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 1px, transparent 2px);
-  opacity: 0.6;
+  width: 150%; height: 150%;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 1px, transparent 2px);
+  opacity: 0.4;
   mix-blend-mode: lighten;
   pointer-events: none;
   z-index: 0;
@@ -19,64 +48,44 @@
 .wave {
   position: absolute;
   top:0; left:0;
-  width: 200%; height: 200%;
+  width: 150%; height: 150%;
   opacity: 0.7;
   z-index:0;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 0 15px currentColor);
-  transform: translate(var(--waveX,0px), var(--waveY,0px)) scale(1) rotate(0deg);
-  animation-timing-function: linear;
+  filter: drop-shadow(0 0 10px currentColor);
+  transform: translate(var(--waveX,0px), var(--waveY,0px)) scale(1);
+  will-change: transform, opacity, border-radius;
 }
 
-/* Neon jagged waves with slower motion + jitter */
-.wave1 { background: #ff00ff; color:#ff00ff; animation: punkWave1 18s linear infinite, strobe 4s infinite, jitter1 5s infinite; }
-.wave2 { background: #00ff00; color:#00ff00; animation: punkWave2 22s linear infinite, strobe 5s infinite, jitter2 6s infinite; }
-.wave3 { background: #00ccff; color:#00ccff; animation: punkWave3 26s linear infinite, strobe 6s infinite, jitter3 7s infinite; }
-
-/* Jagged morphing */
-@keyframes punkWave1 {
-  0%, 100% { border-radius: 10% 80% 20% 70%; }
-  20% { border-radius: 70% 20% 80% 10%; }
-  40% { border-radius: 20% 70% 10% 80%; }
-  60% { border-radius: 80% 10% 70% 20%; }
-  80% { border-radius: 25% 75% 15% 65%; }
+/* Neon waves */
+.wave1 { 
+  background: #eeeeee; 
+  color: #eeeeee; 
+  animation: waveMorph1 20s linear infinite, strobe 5s infinite; 
 }
-@keyframes punkWave2 {
-  0%, 100% { border-radius: 20% 70% 10% 80%; }
+
+.wave2 { 
+  background: #aa00ff; 
+  color: #aa00ff; 
+  animation: waveMorph2 25s linear infinite, strobe 6s infinite; 
+}
+
+/* Morphing shapes */
+@keyframes waveMorph1 {
+  0%,100% { border-radius: 10% 80% 20% 70%; }
+  25% { border-radius: 70% 20% 80% 10%; }
+  50% { border-radius: 20% 70% 10% 80%; }
+  75% { border-radius: 80% 10% 70% 20%; }
+}
+@keyframes waveMorph2 {
+  0%,100% { border-radius: 20% 70% 10% 80%; }
   50% { border-radius: 60% 20% 70% 30%; }
 }
-@keyframes punkWave3 {
-  0%, 100% { border-radius: 30% 50% 30% 50%; }
-  50% { border-radius: 50% 30% 50% 30%; }
-}
 
-/* Strobe flash */
+/* Strobe flashes */
 @keyframes strobe {
   0%,19%,21%,23%,25%,54%,56%,100% { opacity: 0.7; }
   20%,22%,24%,55% { opacity: 1; }
-}
-
-/* Jitter + subtle rotation */
-@keyframes jitter1 {
-  0%   { transform: translate(var(--waveX,0px), var(--waveY,0px)) rotate(0deg) scale(1); }
-  25%  { transform: translate(calc(var(--waveX,0px) + 5px), calc(var(--waveY,0px) - 5px)) rotate(1deg) scale(1.02); }
-  50%  { transform: translate(calc(var(--waveX,0px) - 5px), calc(var(--waveY,0px) + 5px)) rotate(-1deg) scale(0.98); }
-  75%  { transform: translate(calc(var(--waveX,0px) + 3px), calc(var(--waveY,0px) - 3px)) rotate(0.5deg) scale(1.01); }
-  100% { transform: translate(var(--waveX,0px), var(--waveY,0px)) rotate(0deg) scale(1); }
-}
-@keyframes jitter2 {
-  0%   { transform: translate(var(--waveX,0px), var(--waveY,0px)) rotate(0deg) scale(1); }
-  25%  { transform: translate(calc(var(--waveX,0px) - 4px), calc(var(--waveY,0px) + 4px)) rotate(-1deg) scale(0.99); }
-  50%  { transform: translate(calc(var(--waveX,0px) + 4px), calc(var(--waveY,0px) - 4px)) rotate(1deg) scale(1.01); }
-  75%  { transform: translate(calc(var(--waveX,0px) - 2px), calc(var(--waveY,0px) + 2px)) rotate(-0.5deg) scale(0.995); }
-  100% { transform: translate(var(--waveX,0px), var(--waveY,0px)) rotate(0deg) scale(1); }
-}
-@keyframes jitter3 {
-  0%   { transform: translate(var(--waveX,0px), var(--waveY,0px)) rotate(0deg) scale(1); }
-  25%  { transform: translate(calc(var(--waveX,0px) + 3px), calc(var(--waveY,0px) - 3px)) rotate(0.5deg) scale(1.005); }
-  50%  { transform: translate(calc(var(--waveX,0px) - 3px), calc(var(--waveY,0px) + 3px)) rotate(-0.5deg) scale(0.995); }
-  75%  { transform: translate(calc(var(--waveX,0px) + 1px), calc(var(--waveY,0px) - 1px)) rotate(0.2deg) scale(1.002); }
-  100% { transform: translate(var(--waveX,0px), var(--waveY,0px)) rotate(0deg) scale(1); }
 }
 
 /* Content */
