@@ -31,7 +31,7 @@ export class FooterComponent {
       case '/news':
         return 'black';
       case '/music':
-        return 'black';
+        return 'white';
       case '/about':
         return 'white';
       default:

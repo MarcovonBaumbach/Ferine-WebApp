@@ -24,12 +24,12 @@ export class MusicPageComponent implements AfterViewInit {
     this.animate();
   }
 
-   @HostListener('document:mousemove', ['$event'])
+  @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
     const xRatio = (event.clientX / window.innerWidth - 0.5) * 2;
     const yRatio = (event.clientY / window.innerHeight - 0.5) * 2;
 
-    this.targetWave1X = xRatio * 50; // smaller offsets
+    this.targetWave1X = xRatio * 50;
     this.targetWave1Y = yRatio * 40;
     this.targetWave2X = xRatio * 35;
     this.targetWave2Y = yRatio * 25;
