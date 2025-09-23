@@ -1,39 +1,61 @@
+import {
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-   imports: [
-    CommonModule
-  ],
+  imports: [CommonModule, FontAwesomeModule, RouterModule],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.scss'
+  styleUrls: ['./navbar.scss'],
 })
-
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit, OnDestroy {
   @Input() isDark = true;
   @ViewChild('logo', { static: false }) logoRef!: ElementRef<HTMLImageElement>;
 
+  faBars = faBars;
+  faTimes = faTimes;
+
+  menuOpen = false;
+  private routerSub?: Subscription;
+
+  constructor(private router: Router) {}
+
   ngAfterViewInit() {
-    const logo = this.logoRef.nativeElement;
+    // logo animations (optional)
+    if (this.logoRef?.nativeElement) {
+      const logo = this.logoRef.nativeElement;
+      logo.classList.add('shake');
+      logo.addEventListener('animationend', () => logo.classList.remove('shake'));
+      logo.addEventListener('mouseenter', () => {
+        logo.classList.add('rotate');
+        setTimeout(() => logo.classList.remove('rotate'), 1200);
+      });
+    }
 
-    // Shake animation on load
-    logo.classList.add('shake');
-
-    // Remove shake class after animation ends
-    logo.addEventListener('animationend', () => {
-      logo.classList.remove('shake');
+    // close mobile menu on navigation end (so clicking link closes menu)
+    this.routerSub = this.router.events.subscribe(ev => {
+      if (ev instanceof NavigationEnd) {
+        this.menuOpen = false;
+      }
     });
-    
-    // Rotate on hover, but last full 1.2s
-    logo.addEventListener('mouseenter', () => {
-      logo.classList.add('rotate');
+  }
 
-      // Remove rotate class after 1.2s so it can be triggered again
-      setTimeout(() => {
-        logo.classList.remove('rotate');
-      }, 1200);
-    });
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  ngOnDestroy() {
+    this.routerSub?.unsubscribe();
   }
 }
