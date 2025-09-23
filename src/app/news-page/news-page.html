@@ -12,21 +12,19 @@
         <div *ngFor="let show of shows" class="map-card">
 
           <div class="map-section">
-            <div class="section-headline">Date</div>
-            <fa-icon [icon]="['fas','calendar']" class="map-icon"></fa-icon>
+            <div class="section-headline">Date</div>            
             <div class="map-text">{{ show.date }}</div>
           </div>
 
           <div class="map-section">
             <div class="section-headline">Location</div>
-            <fa-icon [icon]="['fas','map-marker-alt']" class="map-icon"></fa-icon>
             <div class="map-text">{{ show.venue }} – {{ show.city }}</div>
           </div>
 
-          <div *ngIf="show.support" class="map-section">
-            <div class="section-headline">Support</div>
+          <div *ngIf="show.lineup" class="map-section">
+            <div class="section-headline">Line UP</div>
             <fa-icon [icon]="['fas','guitar']" class="map-icon"></fa-icon>
-            <div class="map-text">{{ show.support }}</div>
+            <div class="map-text">{{ show.lineup }}</div>
           </div>
 
           <div class="map-section">

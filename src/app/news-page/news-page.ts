@@ -15,7 +15,7 @@ export interface Show {
   date: string;
   venue: string;
   city: string;
-  support?: string;
+  lineup?: string;
   ticketUrl?: string;
   free?: boolean;
   description?: string;
@@ -32,9 +32,10 @@ export class NewsPageComponent implements AfterViewInit {
 
   @Input() shows: Show[] = [
     {
-      date: '22.11.2025',
+      date: '22.11.2025, 18:00',
       venue: 'At Rehersal Facility',
-      city: 'Fröndenberg, GER',
+      city: 'Fröndenberg, GERMANY',
+      lineup: 'Black Beauty, Ferine',
       free: true
     }
   ];

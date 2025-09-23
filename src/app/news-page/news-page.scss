@@ -12,7 +12,6 @@
 
 .tour-dates-container h2 {
   font-family: 'Akronim', sans-serif;
-
   font-size: 2rem;
   text-align: center;
   margin-bottom: 2rem;
@@ -20,7 +19,7 @@
   letter-spacing: 2px;
 }
 
-/* Ticket-style card with rounded corners */
+/* Ticket-style card with subtle texture */
 .map-card {
   display: flex;
   flex-wrap: nowrap;
@@ -29,10 +28,18 @@
   padding: 1.5rem;
   margin-bottom: 2rem;
   background: #fdf6e3;
-  border: 3px solid #000; /* solid black outline */
-  border-radius: 8px; /* slightly rounded corners */
+  border: 3px solid #000;
+  border-radius: 8px;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.6);
   min-height: 120px;
+  position: relative;
+
+  /* subtle grunge/paper texture using CSS noise */
+  background-image: 
+    radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px),
+    radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
 }
 
 /* Horizontal sections */
@@ -115,6 +122,7 @@
   background: #eee;
 }
 
+
 .wave-background {
   position: relative;
   width: 100%;
@@ -177,4 +185,28 @@
   text-align: center;
   color: #4b3d2a;
   padding-top: 20vh;
+}
+
+@media screen and (max-width: 700px) {
+  .map-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .map-section {
+    width: 100%;
+    justify-content: flex-start;
+    border-right: none;
+    border-bottom: 1px dotted #555;
+    padding: 0.5rem 0;
+  }
+
+  .map-section:last-child {
+    border-bottom: none;
+  }
+
+  .map-text {
+    font-size: 0.95rem;
+  }
 }
