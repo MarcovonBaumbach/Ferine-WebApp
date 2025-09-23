@@ -32,11 +32,11 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
   constructor(private router: Router) { }
 
   ngAfterViewInit() {
-    // logo animations (optional)
     if (this.logoRef?.nativeElement) {
       const logo = this.logoRef.nativeElement;
-      logo.classList.add('shake');
-      logo.addEventListener('animationend', () => logo.classList.remove('shake'));
+
+      this.playShakeAndRotate(logo);
+
       logo.addEventListener('mouseenter', () => {
         logo.classList.add('rotate');
         setTimeout(() => logo.classList.remove('rotate'), 1200);
@@ -45,27 +45,43 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
 
     this.detectTheme(this.router.url);
 
-    // close menu + update theme on route change
     this.routerSub = this.router.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
         this.menuOpen = false;
         this.detectTheme(ev.urlAfterRedirects);
+
+        if (this.logoRef?.nativeElement) {
+          this.playShakeAndRotate(this.logoRef.nativeElement);
+        }
       }
     });
   }
 
+  private playShakeAndRotate(logo: HTMLImageElement) {
+
+    logo.classList.remove('shake-rotate');
+    void logo.offsetWidth;
+
+    logo.classList.add('shake-rotate');
+
+    logo.addEventListener(
+      'animationend',
+      () => logo.classList.remove('shake-rotate'),
+      { once: true }
+    );
+  }
+
   private detectTheme(url: string) {
-    if (this.isDark === undefined) {
-      // fallback: NEWS page is light, everything else dark
-      this.isDark = !url.startsWith('/news');
-    }
+  if (this.isDark === undefined) {
+    this.isDark = !url.startsWith('/news');
   }
+}
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-  }
+toggleMenu() {
+  this.menuOpen = !this.menuOpen;
+}
 
-  ngOnDestroy() {
-    this.routerSub?.unsubscribe();
-  }
+ngOnDestroy() {
+  this.routerSub?.unsubscribe();
+}
 }

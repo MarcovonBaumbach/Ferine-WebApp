@@ -20,8 +20,8 @@
   height: auto;
   z-index: 1100;
 
-  &.shake {
-    animation: shake 1.2s ease-in-out forwards;
+  &.shake-rotate {
+    animation: shakeRotate 2s ease-in-out forwards;
   }
 
   &.rotate {
@@ -109,11 +109,13 @@ a.active {
 .burger.light { color: #000; }
 
 /* Animations */
-@keyframes shake {
-  0% { opacity: 0; transform: scale(0.5); }
-  40% { transform: translateY(-15px); }
-  60% { transform: translateY(-8px); }
-  100% { opacity: 1; transform: scale(1); }
+@keyframes shakeRotate {
+  0%   { opacity: 0; transform: translateY(-50px) scale(0.9) rotate(0deg); }
+  20%  { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  40%  { transform: translate(-5px, -3px) rotate(-4deg) scale(1.02); }
+  60%  { transform: translate(5px, 2px) rotate(3deg) scale(0.98); }
+  80%  { transform: translate(-3px, 1px) rotate(-2deg) scale(1.01); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
 }
 
 @keyframes rotat {
