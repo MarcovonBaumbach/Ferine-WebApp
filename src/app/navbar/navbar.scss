@@ -1,3 +1,4 @@
+/* Container */
 .content {
   position: fixed;
   display: flex;
@@ -10,6 +11,7 @@
   z-index: 1000;
   background: rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
+  transition: background 0.3s ease;
 }
 
 /* Logo */
@@ -35,25 +37,25 @@
   align-items: flex-start;
 }
 
-/* Mobile nav (hidden by default) */
+/* Mobile nav */
 .nav-links.mobile {
   display: none;
 }
 
-/* Links base */
+/* Links */
 nav a {
   position: relative;
   text-decoration: none;
   font-family: 'Akronim', sans-serif;
   font-size: 20px;
   transition: transform 0.2s ease, color 0.2s ease;
-  color: inherit; /* let classes control color */
+  color: inherit;
 
   &::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: -4px;
     width: 0;
     height: 2px;
     background-color: currentColor;
@@ -69,18 +71,25 @@ nav a {
   }
 }
 
-/* Colors: apply classes to links */
+/* Active link styling */
+a.active {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  text-shadow: 0 0 6px currentColor, 0 0 12px currentColor;
+}
+
+/* Colors */
 .dark-link {
   color: #fff !important;
 }
-
 .light-link {
   color: #000 !important;
 }
 
-/* Burger button: hidden on desktop, shown on small screens */
+/* Burger */
 .burger {
-  display: none;            /* hidden by default (important) */
+  display: none;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -88,20 +97,22 @@ nav a {
   z-index: 1200;
   padding: 8px;
   line-height: 1;
-  color: inherit; /* color will come from .dark/.light classes */
+  color: inherit;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    animation: skull-shake 0.5s ease-in-out;
+  }
 }
 
-/* explicit dark/light classes for burger (so icon color follows isDark) */
 .burger.dark { color: #fff; }
 .burger.light { color: #000; }
 
-/* Shake/rot animations (reuse your keyframes) */
+/* Animations */
 @keyframes shake {
   0% { opacity: 0; transform: scale(0.5); }
-  20% { transform: translateY(0); }
   40% { transform: translateY(-15px); }
   60% { transform: translateY(-8px); }
-  80% { transform: translateY(0); }
   100% { opacity: 1; transform: scale(1); }
 }
 
@@ -113,7 +124,15 @@ nav a {
   100% { transform: translateX(0) rotate(0deg); }
 }
 
-/* Responsive behavior */
+@keyframes skull-shake {
+  0%,100% { transform: rotate(0); }
+  20% { transform: rotate(-10deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-6deg); }
+  80% { transform: rotate(6deg); }
+}
+
+/* Responsive */
 @media (max-width: 1000px) {
   .burger {
     display: block;
@@ -126,31 +145,50 @@ nav a {
   .nav-links.mobile {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     position: fixed;
     top: 0;
     right: -100%;
     height: 100vh;
-    width: 60%;
-    background: rgba(0, 0, 0, 0.95);
-    padding-top: 120px;
-    transition: right 0.3s ease-in-out;
+    width: 70%;
+    background: transparent;
+    padding-top: 164px;
+    padding-right: 10%;
     gap: 32px;
     z-index: 1199;
-    pointer-events: none; /* prevent clicks when closed */
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    pointer-events: none;
   }
 
   .nav-links.mobile.open {
     right: 0;
-    pointer-events: auto; /* allow clicks when open */
+    pointer-events: auto;
+    animation: punk-slide 0.6s ease forwards;
   }
 
   .nav-links.mobile a {
     font-size: 24px;
+    animation: punk-shake 0.8s ease both;
+  }
+
+  .nav-links.mobile.open a {
+    animation-delay: 0.2s;
   }
 }
 
-/* active link indicator if desired */
-a.active {
-  text-decoration: underline;
+@media (max-width: 750px) {
+  .logo {
+    width: 150px;
+  }
+}
+
+@keyframes punk-slide {
+  from { right: -100%; }
+  to { right: 0; }
+}
+
+@keyframes punk-shake {
+  0% { transform: translateX(-10px) rotate(-2deg); opacity: 0; }
+  50% { transform: translateX(5px) rotate(2deg); opacity: 1; }
+  100% { transform: translateX(0) rotate(0); opacity: 1; }
 }

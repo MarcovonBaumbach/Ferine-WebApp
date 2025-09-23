@@ -29,7 +29,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
   menuOpen = false;
   private routerSub?: Subscription;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngAfterViewInit() {
     // logo animations (optional)
@@ -43,12 +43,22 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
       });
     }
 
-    // close mobile menu on navigation end (so clicking link closes menu)
+    this.detectTheme(this.router.url);
+
+    // close menu + update theme on route change
     this.routerSub = this.router.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
         this.menuOpen = false;
+        this.detectTheme(ev.urlAfterRedirects);
       }
     });
+  }
+
+  private detectTheme(url: string) {
+    if (this.isDark === undefined) {
+      // fallback: NEWS page is light, everything else dark
+      this.isDark = !url.startsWith('/news');
+    }
   }
 
   toggleMenu() {

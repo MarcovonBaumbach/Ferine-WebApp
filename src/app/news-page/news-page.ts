@@ -1,14 +1,44 @@
-import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, HostListener, Inject, Input, PLATFORM_ID } from '@angular/core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+  faSkullCrossbones,
+  faCompass,
+  faXmark,
+  faCalendar,
+  faMapMarkerAlt,
+  faGuitar,
+  faTicketAlt
+} from '@fortawesome/free-solid-svg-icons';
+
+export interface Show {
+  date: string;
+  venue: string;
+  city: string;
+  support?: string;
+  ticketUrl?: string;
+  free?: boolean;
+  description?: string;
+}
 
 @Component({
   selector: 'app-news-page',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './news-page.html',
   styleUrl: './news-page.scss'
 })
 export class NewsPageComponent implements AfterViewInit {
+
+  @Input() shows: Show[] = [
+    {
+      date: '22.11.2025',
+      venue: 'At Rehersal Facility',
+      city: 'Fröndenberg, GER',
+      free: true
+    }
+  ];
+
   // current offsets
   wave1OffsetX = 0;
   wave1OffsetY = 0;
@@ -31,7 +61,18 @@ export class NewsPageComponent implements AfterViewInit {
 
   smoothFactor = 0.08;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+    library: FaIconLibrary) {
+    library.addIcons(
+      faSkullCrossbones,
+      faCompass,
+      faXmark,
+      faCalendar,
+      faMapMarkerAlt,
+      faGuitar,
+      faTicketAlt
+    );
+  }
 
   ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;

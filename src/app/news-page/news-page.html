@@ -6,6 +6,51 @@
   <div class="wave wave3"></div>
 
   <div class="content">
-    <h1>News coming soon!</h1>
+    <div class="tour-dates-container">
+      <h2>Tour Dates</h2>
+      <div class="shows-list">
+        <div *ngFor="let show of shows" class="map-card">
+
+          <div class="map-section">
+            <div class="section-headline">Date</div>
+            <fa-icon [icon]="['fas','calendar']" class="map-icon"></fa-icon>
+            <div class="map-text">{{ show.date }}</div>
+          </div>
+
+          <div class="map-section">
+            <div class="section-headline">Location</div>
+            <fa-icon [icon]="['fas','map-marker-alt']" class="map-icon"></fa-icon>
+            <div class="map-text">{{ show.venue }} – {{ show.city }}</div>
+          </div>
+
+          <div *ngIf="show.support" class="map-section">
+            <div class="section-headline">Support</div>
+            <fa-icon [icon]="['fas','guitar']" class="map-icon"></fa-icon>
+            <div class="map-text">{{ show.support }}</div>
+          </div>
+
+          <div class="map-section">
+            <div class="section-headline">Tickets</div>
+            <fa-icon [icon]="['fas','ticket-alt']" class="map-icon"></fa-icon>
+            <div class="map-text">
+              <ng-container *ngIf="show.ticketUrl; else noTickets">
+                <a [href]="show.ticketUrl" target="_blank" class="ticket-btn">Get Tickets</a>
+              </ng-container>
+              <ng-template #noTickets>
+                <span *ngIf="show.free; else door" class="ticket-free">Free Entry</span>
+                <ng-template #door>
+                  <span class="ticket-door">At the Door</span>
+                </ng-template>
+              </ng-template>
+            </div>
+          </div>
+
+          <div *ngIf="show.description" class="show-description">
+            {{ show.description }}
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>

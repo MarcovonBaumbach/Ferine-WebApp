@@ -1,10 +1,10 @@
 <div class="content" [class.dark]="isDark" [class.light]="!isDark">
+  <!-- Logo -->
   <img
     #logo
     [src]="isDark ? 'assets/img/ferine-logo.png' : 'assets/img/ferine-logo-black.png'"
     alt="Band Logo"
     class="logo"
-    [ngClass]="{'shake': true}"
   />
 
   <!-- Burger icon -->
@@ -17,23 +17,31 @@
     [class.dark]="isDark"
     [class.light]="!isDark"
   >
-    <fa-icon *ngIf="!menuOpen" [icon]="faBars"></fa-icon>
-    <fa-icon *ngIf="menuOpen" [icon]="faTimes"></fa-icon>
+    <fa-icon *ngIf="!menuOpen" [icon]="faBars" class="bars"></fa-icon>
+    <fa-icon *ngIf="menuOpen" [icon]="faTimes" class="times"></fa-icon>
   </button>
 
   <!-- Desktop nav -->
   <nav class="nav-links desktop" role="navigation">
-    <a routerLink="/" routerLinkActive="active" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">HOME</a>
-    <a routerLink="/news" routerLinkActive="active" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">NEWS</a>
-    <a routerLink="/music" routerLinkActive="active" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">MUSIC</a>
-    <a routerLink="/about" routerLinkActive="active" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">ABOUT</a>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+       [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">HOME</a>
+    <a routerLink="/news" routerLinkActive="active"
+       [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">NEWS</a>
+    <a routerLink="/music" routerLinkActive="active"
+       [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">MUSIC</a>
+    <a routerLink="/about" routerLinkActive="active"
+       [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">ABOUT</a>
   </nav>
 
   <!-- Mobile nav -->
-  <nav class="nav-links mobile" [class.open]="menuOpen" role="navigation" aria-hidden="{{!menuOpen}}">
-    <a (click)="toggleMenu()" routerLink="/" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">HOME</a>
-    <a (click)="toggleMenu()" routerLink="/news" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">NEWS</a>
-    <a (click)="toggleMenu()" routerLink="/music" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">MUSIC</a>
-    <a (click)="toggleMenu()" routerLink="/about" [ngClass]="{'dark-link': isDark, 'light-link': !isDark}">ABOUT</a>
+  <nav class="nav-links mobile" [class.open]="menuOpen" role="navigation">
+    <a (click)="toggleMenu()" routerLink="/" [routerLinkActiveOptions]="{exact: true}"
+       [ngClass]="{'dark-link': isDark, 'light-link': !isDark}" routerLinkActive="active">HOME</a>
+    <a (click)="toggleMenu()" routerLink="/news"
+       [ngClass]="{'dark-link': isDark, 'light-link': !isDark}" routerLinkActive="active">NEWS</a>
+    <a (click)="toggleMenu()" routerLink="/music"
+       [ngClass]="{'dark-link': isDark, 'light-link': !isDark}" routerLinkActive="active">MUSIC</a>
+    <a (click)="toggleMenu()" routerLink="/about"
+       [ngClass]="{'dark-link': isDark, 'light-link': !isDark}" routerLinkActive="active">ABOUT</a>
   </nav>
 </div>

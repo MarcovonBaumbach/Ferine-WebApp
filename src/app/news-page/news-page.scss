@@ -1,6 +1,118 @@
 :host {
-    
-    font-family: Raleway, sans-serif;
+  font-family: 'Raleway', sans-serif;
+}
+
+.tour-dates-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  color: #111;
+  font-family: 'Special Elite', monospace, sans-serif;
+}
+
+.tour-dates-container h2 {
+  font-family: 'Akronim', sans-serif;
+
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Ticket-style card with rounded corners */
+.map-card {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  background: #fdf6e3;
+  border: 3px solid #000; /* solid black outline */
+  border-radius: 8px; /* slightly rounded corners */
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.6);
+  min-height: 120px;
+}
+
+/* Horizontal sections */
+.map-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+  justify-content: center;
+  padding: 0 1rem;
+  border-right: 1px dotted #555;
+}
+
+.map-section:last-child {
+  border-right: none;
+}
+
+/* Section headlines */
+.section-headline {
+  font-size: 0.75rem;
+  font-weight: 300;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #333;
+}
+
+.map-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.map-text {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Show description below card */
+.show-description {
+  width: 100%;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* Ticket buttons / labels */
+.ticket-btn {
+  background: #111;
+  color: #fdf6e3;
+  text-decoration: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  box-shadow: 2px 2px 0 #555;
+  transition: transform 0.2s ease;
+}
+
+.ticket-btn:hover {
+  transform: scale(1.05);
+}
+
+.ticket-free,
+.ticket-door {
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: 2px dashed #111;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.ticket-free {
+  background: #e2f7e2;
+}
+
+.ticket-door {
+  background: #eee;
 }
 
 .wave-background {
