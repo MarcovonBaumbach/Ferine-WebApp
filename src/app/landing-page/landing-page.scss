@@ -41,6 +41,27 @@
   );
 }
 
+.site-footer {
+  position: absolute; /* stick to the bottom of the background */
+  bottom: 0;
+  width: 100%;
+  margin-right: 64px;
+  text-align: center;
+  font-size: 14px;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem; /* space between links */
+  color: #e8e8e8;
+  pointer-events: auto;
+  z-index: 2000;
+}
+
+.site-footer a {
+  color: #e8e8e8;
+  text-decoration: none;
+}
+
 @keyframes zoomOut {
   from {
     transform: scale(1.2); /* Start zoomed in */
