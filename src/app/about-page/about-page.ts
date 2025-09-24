@@ -8,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './about-page.scss'
 })
 export class AboutPageComponent {
-
+  scrollToBandMembers(): void {
+    const element = document.getElementById('band-members');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }

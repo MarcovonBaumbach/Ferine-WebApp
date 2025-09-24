@@ -2,47 +2,97 @@
   width: 100vw;
   height: 100vh;
   background: black;
-  overflow: hidden; /* hide the cut bottom */
+  overflow: hidden;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* align container to top */
+  align-items: flex-start;
 }
 
 .image-container {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* ensure cropped bottom is hidden */
+  overflow: hidden;
   transform: scale(1.2);
-  /* Animate zoom out */
   animation: zoomOut 10s ease-out forwards;
 }
 
 .image-container img {
-  width: 100%;     /* always span full width */
-  height: auto;    /* keep proportions */
+  width: 100%;
+  height: auto;
   display: block;
   position: absolute;
-  top: 0;          /* stick to top, so only bottom cuts */
+  top: 0;
   left: 0;
 }
 
-/* Overlay matches the image area */
+/* Overlay vignette */
 .overlay {
   position: absolute;
-  top: 0; left: 0;
-  right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   pointer-events: none;
-
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 0, 0, 0.5) 30%,
+    rgba(0, 0, 0, 0.55) 35%,
     rgba(0, 0, 0, 1) 100%
   );
+  z-index: 1;
+}
+
+/* Glow layers for smoother blend */
+.overlay::before,
+.overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  filter: blur(100px);
+  opacity: 0;
+  animation: pulseGlow 3s ease-in-out infinite alternate,
+             driftGlow 8s ease-in-out infinite alternate;
+  z-index: 2;
+}
+
+/* Purple glow */
+.overlay::before {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(128, 0, 128, 0.6),
+    transparent 70%
+  );
+  animation-delay: 0s, 0s;
+}
+
+/* Turquoise glow */
+.overlay::after {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(64, 224, 208, 0.6),
+    transparent 70%
+  );
+  animation-delay: 1.5s, 2s; /* stagger for more organic look */
+}
+
+@keyframes pulseGlow {
+  from { opacity: 0.2; }
+  to { opacity: 0.8; }
+}
+
+@keyframes driftGlow {
+  0%   { background-position: 50% 50%; }
+  25%  { background-position: 60% 40%; }
+  50%  { background-position: 40% 60%; }
+  75%  { background-position: 55% 45%; }
+  100% { background-position: 50% 50%; }
 }
 
 .site-footer {
-  position: absolute; /* stick to the bottom of the background */
+  position: absolute;
   bottom: 0;
   width: 100%;
   margin-right: 64px;
@@ -51,7 +101,7 @@
   padding: 1rem 0;
   display: flex;
   justify-content: flex-end;
-  gap: 0.5rem; /* space between links */
+  gap: 0.5rem;
   color: #e8e8e8;
   pointer-events: auto;
   z-index: 2000;
@@ -63,10 +113,17 @@
 }
 
 @keyframes zoomOut {
-  from {
-    transform: scale(1.2); /* Start zoomed in */
-  }
-  to {
-    transform: scale(1); /* End at normal size */
+  from { transform: scale(1.2); }
+  to { transform: scale(1); }
+}
+
+@media (max-width: 750px) {
+  .image-container img {
+    width: auto;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
