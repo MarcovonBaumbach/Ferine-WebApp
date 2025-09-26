@@ -89,6 +89,7 @@
 
 /* Hover effect remains */
 .content iframe:hover {
+  transform: scale(1.01);
   box-shadow: 0 0 30px rgba(255,255,255,0.8),
               0 0 70px rgba(128,0,255,0.5);
 }
