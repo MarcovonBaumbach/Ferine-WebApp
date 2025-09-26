@@ -5,11 +5,12 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { filter } from 'rxjs';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, NgStyle],
   templateUrl: './footer.html',
   styleUrls: ['./footer.scss']
 })
@@ -36,6 +37,19 @@ export class FooterComponent {
         return 'white';
       default:
         return 'white';
+    }
+  }
+
+  getBackgroundColor(): string {
+    switch (this.currentRoute) {
+      case '/privacy-policy':
+        return 'rgba(0,0,0,0.9)';
+      case '/imprint':
+        return 'rgba(0,0,0,0.9)';
+      case '/about':
+        return 'rgba(0,0,0,0.9)';
+      default:
+        return 'transparent';
     }
   }
 }

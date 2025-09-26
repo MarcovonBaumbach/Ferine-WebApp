@@ -1,4 +1,4 @@
-<div class="content" [class.dark]="isDark" [class.light]="!isDark">
+<div class="content" [class.dark]="isDark" [class.light]="!isDark" [ngStyle]="{'background': getBackgroundColor()}">
   <!-- Logo -->
   <img
     #logo

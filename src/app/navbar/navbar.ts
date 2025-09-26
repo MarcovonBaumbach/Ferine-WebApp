@@ -6,16 +6,16 @@ import {
   AfterViewInit,
   OnDestroy,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgStyle } from '@angular/common';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, RouterModule],
+  imports: [CommonModule, FontAwesomeModule, RouterModule, NgStyle],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.scss'],
 })
@@ -25,7 +25,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
 
   faBars = faBars;
   faTimes = faTimes;
-
+  currentRoute: string = '';
   menuOpen = false;
   private routerSub?: Subscription;
 
@@ -42,6 +42,12 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
         setTimeout(() => logo.classList.remove('rotate'), 1200);
       });
     }
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.currentRoute = event.urlAfterRedirects;
+      });
 
     this.detectTheme(this.router.url);
 
@@ -72,16 +78,29 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
   }
 
   private detectTheme(url: string) {
-  if (this.isDark === undefined) {
-    this.isDark = !url.startsWith('/news');
+    if (this.isDark === undefined) {
+      this.isDark = !url.startsWith('/news');
+    }
   }
-}
 
-toggleMenu() {
-  this.menuOpen = !this.menuOpen;
-}
+  getBackgroundColor(): string {
+    switch (this.currentRoute) {
+      case '/privacy-policy':
+        return 'rgba(0,0,0,0.9)';
+      case '/imprint':
+        return 'rgba(0,0,0,0.9)';
+      case '/about':
+        return 'rgba(0,0,0,0.3)';
+      default:
+        return 'rgba(0,0,0,0.05)';
+    }
+  }
 
-ngOnDestroy() {
-  this.routerSub?.unsubscribe();
-}
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  ngOnDestroy() {
+    this.routerSub?.unsubscribe();
+  }
 }

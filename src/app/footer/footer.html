@@ -7,7 +7,7 @@
     </a>
   </div>
 
-  <div class="social-icons">
+  <div class="social-icons" [ngStyle]="{'background': getBackgroundColor()}">
     <a href="https://facebook.com/ferine.band" target="_blank" class="social-icon"
       [style.--icon-color]="getIconColor('facebook')">
       <fa-icon [icon]="['fab','facebook']"></fa-icon>
