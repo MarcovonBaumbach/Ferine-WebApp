@@ -5,12 +5,12 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { filter } from 'rxjs';
-import { NgStyle } from '@angular/common';
+import { CommonModule, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [FontAwesomeModule, NgStyle],
+  imports: [FontAwesomeModule, NgStyle, CommonModule],
   templateUrl: './footer.html',
   styleUrls: ['./footer.scss']
 })
@@ -34,9 +34,20 @@ export class FooterComponent {
       case '/music':
         return 'white';
       case '/about':
-        return 'white';
+        return '#00aaff';
       default:
         return 'white';
+    }
+  }
+
+    getIconColorMail() {
+    switch (this.currentRoute) {
+      case '/news':
+        return 'black';
+      case '/music':
+        return 'white';
+      default:
+        return '#00aaff';
     }
   }
 
@@ -45,8 +56,6 @@ export class FooterComponent {
       case '/privacy-policy':
         return 'rgba(0,0,0,0.9)';
       case '/imprint':
-        return 'rgba(0,0,0,0.9)';
-      case '/about':
         return 'rgba(0,0,0,0.9)';
       default:
         return 'transparent';

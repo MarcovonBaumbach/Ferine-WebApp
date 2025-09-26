@@ -90,7 +90,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
       case '/imprint':
         return 'rgba(0,0,0,0.9)';
       case '/about':
-        return 'rgba(0,0,0,0.3)';
+        return 'rgba(0,0,0,0.9)';
       default:
         return 'rgba(0,0,0,0.05)';
     }

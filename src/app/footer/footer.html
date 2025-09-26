@@ -1,7 +1,7 @@
-<footer class="footer">
-  <!-- Mail row above -->
+<footer *ngIf="currentRoute !=='/about'" class="footer">
   <div class="mail-row">
-    <a href="mailto:contact@yourband.com" class="contact-link">
+    <a href="mailto:contact@yourband.com" class="contact-link"
+      [style.--mail-icon-color]="getIconColorMail()">
       <span class="contact-text">Contact Us</span>
       <fa-icon [icon]="['fas', 'envelope']" class="mail-icon"></fa-icon>
     </a>

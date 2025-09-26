@@ -26,6 +26,27 @@
   left: 0;
 }
 
+.site-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-right: 64px;
+  text-align: center;
+  font-size: 14px;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  color: #e8e8e8;
+  pointer-events: auto;
+  z-index: 2000;
+}
+
+.site-footer a {
+  color: #e8e8e8;
+  text-decoration: none;
+}
+
 /* Overlay vignette */
 .overlay {
   position: absolute;
@@ -89,27 +110,6 @@
   50%  { background-position: 40% 60%; }
   75%  { background-position: 55% 45%; }
   100% { background-position: 50% 50%; }
-}
-
-.site-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  margin-right: 64px;
-  text-align: center;
-  font-size: 14px;
-  padding: 1rem 0;
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  color: #e8e8e8;
-  pointer-events: auto;
-  z-index: 2000;
-}
-
-.site-footer a {
-  color: #e8e8e8;
-  text-decoration: none;
 }
 
 @keyframes zoomOut {
