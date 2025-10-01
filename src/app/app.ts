@@ -8,14 +8,14 @@ import { filter } from 'rxjs';
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet, 
+    RouterOutlet,
     NavbarComponent,
     FooterComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App implements AfterViewInit{
+export class App implements AfterViewInit {
   protected readonly title = signal('band-website');
   isDarkPage = true; // true = white (default), false = black
 
@@ -36,12 +36,22 @@ export class App implements AfterViewInit{
     if (!isPlatformBrowser(this.platformId)) return;
 
     const cursor = document.querySelector('.custom-cursor') as HTMLElement;
+    let mouseX = 0;
+    let mouseY = 0;
 
-    // Follow mouse
-    window.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
+    // Track mouse coordinates
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     });
+
+    // Animate cursor instantly via requestAnimationFrame
+    const animate = () => {
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+      requestAnimationFrame(animate);
+    };
+    animate();
 
     // Show skull only on links
     const links = document.querySelectorAll('a');
@@ -49,12 +59,12 @@ export class App implements AfterViewInit{
       link.addEventListener('mouseenter', () => {
         cursor.style.opacity = '1';
         cursor.classList.add('hover-grow');
-        link.style.cursor = 'none'; // hide system cursor on this link
+        link.style.cursor = 'none';
       });
       link.addEventListener('mouseleave', () => {
         cursor.style.opacity = '0';
         cursor.classList.remove('hover-grow');
-        link.style.cursor = 'auto'; // restore system cursor
+        link.style.cursor = 'auto';
       });
     });
 

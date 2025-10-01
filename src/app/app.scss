@@ -8,23 +8,22 @@ a {
   cursor: none;
 }
 
-/* Skull cursor */
 .custom-cursor {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 40px;
   height: 40px;
   background-image: url('/assets/img/skull.svg');
   background-size: cover;
   pointer-events: none;
-  transform: translate(-50%, -50%);
   z-index: 9999;
-  opacity: 0; /* hidden by default */
-  //box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-  transition: transform 0.1s ease, opacity 0.2s ease, box-shadow 0.1s ease;
+  opacity: 0;
+
+  /* use scale only for hover effect */
+  transition: opacity 0.15s ease, transform 0.05s linear;
 }
 
-/* Grow/glow when hovering links */
 .custom-cursor.hover-grow {
-  transform: translate(-50%, -50%) scale(1.5);
-  //box-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000, 0 0 45px #ff0000;
+  transform: scale(1.5); /* scale will be merged with translate3d in JS */
 }
